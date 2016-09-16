@@ -31,20 +31,20 @@ type alias User =
     }
 
 
-type alias AppModel =
-    { user : User
-    , mdl : Material.Model
-    , snackbar : Snackbar.Model (Maybe Msg)
-    , tasks : List MyTask
-    }
-
-
 type alias Mdl =
     Material.Model
 
 
 type alias Errors =
     Dict.Dict String (List String)
+
+
+type alias AppModel =
+    { user : User
+    , mdl : Material.Model
+    , snackbar : Snackbar.Model (Maybe Msg)
+    , tasks : List MyTask
+    }
 
 
 

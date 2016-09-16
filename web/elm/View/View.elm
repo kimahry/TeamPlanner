@@ -11,6 +11,70 @@ import Material.Textfield as Textfield
 import Material.Button as Button exposing (..)
 import Material.Snackbar as Snackbar
 import Material.Grid exposing (..)
+import Material.Options as Options exposing (css, when)
+import Material.Typography as Typo
+import Material.Footer as Footer
+
+
+-- HEADER
+
+
+header : AppModel -> List (Html Model.Msg)
+header model =
+    [ Layout.row [ css "height" "60px" ]
+        [ Layout.title
+            [ css "font-size" "50px", css "padding-top" "10px" ]
+            [ text "TeamPlanner" ]
+        , Layout.spacer
+        , Layout.navigation []
+            [ Layout.link
+                [ Layout.href "" ]
+                [ text "Login" ]
+            , Layout.link
+                [ Layout.href "" ]
+                [ text "Register" ]
+            ]
+        ]
+    ]
+
+
+
+-- FOOTER
+
+
+footer : AppModel -> Html Model.Msg
+footer model =
+    Footer.mini []
+        { left =
+            Footer.left []
+                [ Footer.logo [] [ Footer.html <| text "Mini Footer Example" ]
+                , Footer.links []
+                    [ Footer.linkItem [ Footer.href "#footers" ] [ Footer.html <| text "Link 1" ]
+                    , Footer.linkItem [ Footer.href "#footers" ] [ Footer.html <| text "Link 2" ]
+                    , Footer.linkItem [ Footer.href "#footers" ] [ Footer.html <| text "Link 3" ]
+                    ]
+                ]
+        , right =
+            Footer.right []
+                []
+        }
+
+
+
+-- DRAWER
+
+
+drawer : List (Html Model.Msg)
+drawer =
+    [ Layout.title [] [ text "My project" ]
+    , Layout.navigation
+        []
+        [ Layout.link
+            [ Layout.href "" ]
+            [ text "Manager Users" ]
+        ]
+    ]
+
 
 
 -- VIEW
@@ -18,22 +82,22 @@ import Material.Grid exposing (..)
 
 view : AppModel -> Html Model.Msg
 view model =
-    Material.Scheme.topWithScheme Color.BlueGrey Color.LightBlue <|
-        Layout.render MDL
-            model.mdl
-            [ Layout.fixedHeader
-            ]
-            { header = []
-            , drawer = []
-            , tabs = ( [], [] )
-            , main =
-                [ div
-                    []
-                    [ Snackbar.view model.snackbar |> App.map Snackbar
-                    , body model
-                    ]
+    Layout.render MDL
+        model.mdl
+        [ Layout.fixedHeader
+        ]
+        { header = header model
+        , drawer = drawer
+        , tabs = ( [], [] )
+        , main =
+            [ div
+                []
+                [ Snackbar.view model.snackbar |> App.map Snackbar
+                , body model
+                , footer model
                 ]
-            }
+            ]
+        }
 
 
 body : AppModel -> Html Model.Msg
