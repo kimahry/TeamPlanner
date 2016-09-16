@@ -3,3 +3,4 @@ deps/**
 priv/static/**
 web/elm/elm-stuff/**
 node_modules/**
+web/static/js/main.js
